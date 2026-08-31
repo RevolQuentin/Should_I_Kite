@@ -1,0 +1,4 @@
+import test from 'node:test'; import assert from 'node:assert/strict'; import { cardinalDirection } from '../src/utils.js'; import { findTides } from '../src/tides.js'; import { recommendWing } from '../src/wing.js';
+test('directions cardinales',()=>{assert.equal(cardinalDirection(0),'N');assert.equal(cardinalDirection(45),'NE');assert.equal(cardinalDirection(225),'SO');assert.equal(cardinalDirection(360),'N')});
+test('détecte les extrema de marée',()=>{const result=findTides([{time:0,height:1},{time:1,height:3},{time:2,height:1},{time:3,height:2}]);assert.deepEqual(result,[{time:1,height:3,type:'high'},{time:2,height:1,type:'low'}])});
+test('recommandation issue de la matrice',()=>{const r=recommendWing({weight:75,wind:20,level:'intermediate',board:'twin-tip',quiver:[7,9,12]});assert.equal(r.size,'9.0');assert.equal(r.owned,9)});
